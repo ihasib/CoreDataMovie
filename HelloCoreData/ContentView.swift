@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    let coreDM: CoreDataManager
+    @State private var movieName: String = ""
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            TextField("Enter Movie name", text: $movieName)
+            Button("Save", role: nil, action: {
+                coreDM.saveMovie(title: movieName)
+            })
+            Button("Show All") {
+                let movies = coreDM.getAllMovies()
+                for movie in movies {
+                    print(movie.title)
+                }
+            }
+            
+//            List(/)
+            Spacer()
+        }
+        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(coreDM: CoreDataManager())
     }
 }
