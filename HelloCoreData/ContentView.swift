@@ -10,21 +10,36 @@ import SwiftUI
 struct ContentView: View {
     let coreDM: CoreDataManager
     @State private var movieName: String = ""
+    @State private var movies: [Movie] = []
     var body: some View {
         VStack {
             TextField("Enter Movie name", text: $movieName)
             Button("Save", role: nil, action: {
                 coreDM.saveMovie(title: movieName)
+                movies = coreDM.getAllMovies()
             })
             Button("Show All") {
-                let movies = coreDM.getAllMovies()
+                movies = coreDM.getAllMovies()
                 for movie in movies {
                     print(movie.title)
                 }
             }
-            
-//            List(/)
+
+            List {
+                ForEach(movies) { movie in
+                    Text(movie.title ?? "")
+                }.onDelete(perform: {indexSet in
+                    indexSet.forEach { index in
+                        let selectedMovie = movies[index]
+                        coreDM.removeMovie(movie: selectedMovie)
+                        movies = coreDM.getAllMovies()
+                    }
+                })
+            }
             Spacer()
+        }
+        .onAppear() {
+            movies = coreDM.getAllMovies()
         }
         .padding()
     }

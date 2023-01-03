@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BD962CD29645D750089262A /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD962CC29645D750089262A /* MovieDetail.swift */; };
 		64110D0A29634A5E00D251CF /* HelloCoreDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64110D0929634A5E00D251CF /* HelloCoreDataApp.swift */; };
 		64110D0C29634A5E00D251CF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64110D0B29634A5E00D251CF /* ContentView.swift */; };
 		64110D0E29634A6100D251CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64110D0D29634A6100D251CF /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5BD962CC29645D750089262A /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		64110D0629634A5E00D251CF /* HelloCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64110D0929634A5E00D251CF /* HelloCoreDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloCoreDataApp.swift; sourceTree = "<group>"; };
 		64110D0B29634A5E00D251CF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				64110D0D29634A6100D251CF /* Assets.xcassets */,
 				64110D0F29634A6100D251CF /* Preview Content */,
 				64110D1729634BE700D251CF /* Model.xcdatamodeld */,
+				5BD962CC29645D750089262A /* MovieDetail.swift */,
 			);
 			path = HelloCoreData;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			files = (
 				64110D0C29634A5E00D251CF /* ContentView.swift in Sources */,
 				64110D0A29634A5E00D251CF /* HelloCoreDataApp.swift in Sources */,
+				5BD962CD29645D750089262A /* MovieDetail.swift in Sources */,
 				64110D1C29634D8900D251CF /* CoreDataManager.swift in Sources */,
 				64110D1929634BE700D251CF /* Model.xcdatamodeld in Sources */,
 			);

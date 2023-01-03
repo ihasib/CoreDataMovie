@@ -23,7 +23,7 @@ class CoreDataManager {
     }
     
     func saveMovie(title: String) {
-        let movie = Movie(context: persistentContainer.viewContext)
+        let movie = Movie(context: persistentContainer.viewContext) //Movie gets registered to this viewContext
         movie.title = title
         do {
             try persistentContainer.viewContext.save()
@@ -32,7 +32,15 @@ class CoreDataManager {
             print("movie save failed due to \(error.localizedDescription)")
         }
     }
-    
+
+    func updateMovie() {
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print("movie update failed due to \(error.localizedDescription)")
+        }
+    }
     
     func getAllMovies() -> [Movie] {
         var movies: [Movie] = []
@@ -43,5 +51,15 @@ class CoreDataManager {
             print("movies fetch failed due to \(error.localizedDescription)")
         }
         return movies
+    }
+
+    func removeMovie(movie: Movie) {
+        persistentContainer.viewContext.delete(movie)
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print("Movie deletion failed due to \(error.localizedDescription)")
+        }
     }
 }
