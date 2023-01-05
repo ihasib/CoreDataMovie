@@ -27,6 +27,8 @@ struct ContentView: View {
 
             List {
                 ForEach(movies) { movie in
+                    NavigationLink(destination: MovieDetail(movie: movie), label: { Text(movie.title ?? "")}
+                    )
                     Text(movie.title ?? "")
                 }.onDelete(perform: {indexSet in
                     indexSet.forEach { index in
@@ -47,6 +49,13 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(coreDM: CoreDataManager())
+        Group {
+            ContentView(coreDM: CoreDataManager())
+                .previewInterfaceOrientation(.portrait)
+            ContentView(coreDM: CoreDataManager())
+                .previewInterfaceOrientation(.portraitUpsideDown)
+            ContentView(coreDM: CoreDataManager())
+            ContentView(coreDM: CoreDataManager())
+        }
     }
 }
