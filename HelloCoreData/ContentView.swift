@@ -11,39 +11,43 @@ struct ContentView: View {
     let coreDM: CoreDataManager
     @State private var movieName: String = ""
     @State private var movies: [Movie] = []
+    @State var needsRefresh: Bool = false
     var body: some View {
-        VStack {
-            TextField("Enter Movie name", text: $movieName)
-            Button("Save", role: nil, action: {
-                coreDM.saveMovie(title: movieName)
-                movies = coreDM.getAllMovies()
-            })
-            Button("Show All") {
-                movies = coreDM.getAllMovies()
-                for movie in movies {
-                    print(movie.title)
-                }
-            }
-
-            List {
-                ForEach(movies) { movie in
-                    NavigationLink(destination: MovieDetail(movie: movie), label: { Text(movie.title ?? "")}
-                    )
-                    Text(movie.title ?? "")
-                }.onDelete(perform: {indexSet in
-                    indexSet.forEach { index in
-                        let selectedMovie = movies[index]
-                        coreDM.removeMovie(movie: selectedMovie)
-                        movies = coreDM.getAllMovies()
-                    }
+        NavigationView {
+            VStack {
+                TextField("Enter Movie name", text: $movieName)
+                Button("Save", role: nil, action: {
+                    coreDM.saveMovie(title: movieName)
+                    movies = coreDM.getAllMovies()
                 })
+                Button("Show All") {
+                    movies = coreDM.getAllMovies()
+                    for movie in movies {
+                        print(movie.title)
+                    }
+                }
+                
+                List {
+                    ForEach(movies) { movie in
+                        NavigationLink(destination: MovieDetail(movie: movie,coreDM: coreDM, needsRefresh: $needsRefresh), label: { Text(movie.title ?? "")}
+                        )
+//                        Text(movie.title ?? "")
+                    }.onDelete(perform: {indexSet in
+                        indexSet.forEach { index in
+                            let selectedMovie = movies[index]
+                            coreDM.removeMovie(movie: selectedMovie)
+                            movies = coreDM.getAllMovies()
+                        }
+                    })
+                }
+                .accentColor(needsRefresh ? .white : .black)
+                Spacer()
             }
-            Spacer()
+            .onAppear() {
+                movies = coreDM.getAllMovies()
+            }
+            .padding()
         }
-        .onAppear() {
-            movies = coreDM.getAllMovies()
-        }
-        .padding()
     }
 }
 
